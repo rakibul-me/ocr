@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OCR - Extract Texts from Image</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+
+  <body>
+    <main>
+      <header>
+        <img src="ocr-icon.jpg" alt="OCR Icon" />
+        <h1>Optical Character Recognition</h1>
+        <h2>Extract texts from image.</h2>
+      </header>
+      <section class="converter">
+        <div class="image-result">
+          <div
+            class="upload"
+            id="upload"
+            dropzone="true"
+            title="Click to choose image or drag & drop an image. Maximum file size is 1MB"
+          >
+            <img class="hidden" id="uploaded-image" src="#" alt="" />
+            <div id="upload-ins">
+              <div class="upload-emoji">&#128228;</div>
+              Click to <b>Choose Image</b> or <b>Drag & Drop</b> an image.
+            </div>
+            <form method="post">
+              <input type="file" name="image" id="image" accept="image/*" />
+            </form>
+            <button id="remove-image" class="hidden">Remove</button>
+          </div>
+          <div class="result" id="result">
+            <div class="tools">
+              <button id="txt" title="Download in a text file">
+                Download .txt
+              </button>
+              <button id="copy" title="Copy to clipboard">&#128203;</button>
+            </div>
+            <div id="text" contenteditable="true"></div>
+          </div>
+        </div>
+        <p id="message" class="hidden"></p>
+        <button class="reset" id="reset">Reset</button>
+        <button class="extract-btn" id="extract-btn">
+          Extract<span class="ing">ing </span>
+          <span class="loader">&#8987;</span>
+        </button>
+      </section>
+    </main>
+  </body>
+</html>
