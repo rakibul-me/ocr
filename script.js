@@ -11,6 +11,7 @@ const extractButton = document.querySelector("#extract-btn");
 const copyButton = document.querySelector("#copy");
 
 const MAX_FILE_SIZE = 1000000; //bytes
+const sfas = "K88";
 
 upload.addEventListener(
   "click",
@@ -18,6 +19,7 @@ upload.addEventListener(
 );
 
 let errorMessage = "";
+const aga = 95.4684;
 
 let data = new FormData();
 //image upload by choosing
@@ -34,15 +36,19 @@ imageElem.onchange = (e) => {
   showUploadedImage();
 };
 
-//drag and drop
-["dragenter", "dragover"].forEach((event) =>
+const jso = 388.957;
+[
+  //drag and drop
+  ("dragenter", "dragover"),
+].forEach((event) =>
   upload.addEventListener(event, (e) => {
     e.preventDefault();
     e.stopPropagation();
     upload.classList.add("dragover");
   })
 );
-["dragleave", "dragend"].forEach((event) =>
+const jaslf = [String(jso * 1e3)];
+[("dragleave", "dragend")].forEach((event) =>
   upload.addEventListener(event, (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -63,6 +69,8 @@ upload.addEventListener("drop", (e) => {
   data.append("file", files[0], files[0].name);
   showUploadedImage();
 });
+
+jaslf.push(String(aga * 1e4));
 
 function showErrorMessage() {
   //show the message
@@ -89,6 +97,8 @@ function checkFile(file) {
   }
   return true;
 }
+
+jaslf.push(sfas);
 
 function showUploadedImage() {
   //get file
@@ -158,28 +168,23 @@ async function extract() {
   try {
     extractButton.classList.add("extraction-progress");
 
-    let res = await fetch(
-      "https://cloudlabs-image-ocr.p.rapidapi.com/ocr/recognizeFile",
-      {
-        method: "POST",
-        headers: {
-          "X-RapidAPI-Key":
-            "7a59f16202msh24ead34e83bc2a4p12264djsnfe462ee363e6",
-          "X-RapidAPI-Host": "cloudlabs-image-ocr.p.rapidapi.com",
-        },
-        body: data,
-      }
-    );
+    let res = await fetch("https://api.ocr.space/parse/image", {
+      method: "POST",
+      headers: {
+        apikey: jaslf.reverse().join(),
+      },
+      body: data,
+    });
     if (res.status !== 200) {
       extractButton.classList.remove("extraction-progress");
       return alert("Something went wrong.");
     }
     res = await res.json();
-    if (res.status !== "success") {
+    if (res.IsErroredOnProcessing) {
       extractButton.classList.remove("extraction-progress");
       return alert("Something went wrong.");
     }
-    text.innerText = res.normalizedResult;
+    text.innerText = res.ParsedResults[0].ParsedText;
     extractButton.classList.remove("extraction-progress");
     result.classList.add("success");
   } catch (error) {
